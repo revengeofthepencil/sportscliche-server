@@ -10,4 +10,8 @@ module.exports = (app) => {
     // Retrieve a single cliche with clicheId
     app.get('/cliches/:clicheId', cliches.findOne);
 
+
+    // Retrieve a random set of cliches
+    app.get('/cliches/random/:clicheCount', cliches.findRandom);
+
 }

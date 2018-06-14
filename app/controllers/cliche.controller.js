@@ -40,6 +40,29 @@ exports.findAll = (req, res) => {
     });
 };
 
+
+// Find a random set of cliches
+exports.findRandom = (req, res) => {
+    const count = parseInt(req.params.clicheCount)
+    Cliche.aggregate([ { $sample: { size: count } },
+        // TODO: update for multiple sports
+        { $match:  {"sport" : "Football"} },
+        {$project : {_id : 1, content : 1} }
+    ], function (err, result) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+    }).then(cliches => {
+        res.send(cliches);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving cliches."
+        });
+    });
+};
+
+
 // Find a single cliche with a clicheId
 exports.findOne = (req, res) => {
     Cliche.findById(req.params.clicheId)
