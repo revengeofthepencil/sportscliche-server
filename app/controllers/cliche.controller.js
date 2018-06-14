@@ -44,9 +44,10 @@ exports.findAll = (req, res) => {
 // Find a random set of cliches
 exports.findRandom = (req, res) => {
     const count = parseInt(req.params.clicheCount)
-    Cliche.aggregate([ { $sample: { size: count } },
+    Cliche.aggregate([
         // TODO: update for multiple sports
         { $match:  {"sport" : "Football"} },
+        { $sample: { size: count } },
         {$project : {_id : 1, content : 1} }
     ], function (err, result) {
         if (err) {
