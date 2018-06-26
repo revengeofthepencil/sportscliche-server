@@ -16,13 +16,13 @@ var mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL
 
 if (mongoURL == null && process.env.MONGODB_DATABASE) {
         mongoHost = process.env.DATABASE_SERVICE_NAME ? process.env.DATABASE_SERVICE_NAME  : '127.0.0.1:27017',
-        mongoPort = process.env.MONGO_PORT ? process.env.MONGO_PORT  : null,
         mongoDatabase = process.env.MONGODB_DATABASE
         mongoPassword = process.env.MONGODB_PASSWORD,
     mongoUser = process.env.MONGODB_USER;
 
-        if (mongoPort && mongoPort != null) {
-            mongoHost = mongoHost + ":" + mongoPort
+    if (process.env.MONGO_PORT) {
+            console.log("hot diggity! Got mongo port " + process.env.MONGO_PORT)
+            mongoHost = mongoHost + ":" + process.env.MONGO_PORT
         }
 
     if (mongoHost && mongoDatabase) {
