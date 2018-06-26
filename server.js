@@ -14,13 +14,12 @@ mongoose.Promise = global.Promise;
 
 var mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL
 
-if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
-    var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
-        mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'],
-        mongoPort = process.env[mongoServiceName + '_SERVICE_PORT'],
-        mongoDatabase = process.env[mongoServiceName + '_DATABASE'],
-        mongoPassword = process.env[mongoServiceName + '_PASSWORD']
-    mongoUser = process.env[mongoServiceName + '_USER'];
+if (mongoURL == null && process.env.MONGODB_DATABASE) {
+        mongoHost = process.env.SERVICE_HOST ? process.env.SERVICE_HOST  : '127.0.0.1',
+        mongoPort = process.env.SERVICE_PORT ? process.env.SERVICE_PORT : '27017' ,
+        mongoDatabase = process.env.MONGODB_DATABASE
+        mongoPassword = process.env.MONGODB_PASSWORD,
+    mongoUser = process.env.MONGODB_USER;
 
     if (mongoHost && mongoPort && mongoDatabase) {
         mongoURLLabel = mongoURL = 'mongodb://';
