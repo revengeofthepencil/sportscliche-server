@@ -15,6 +15,7 @@ mongoose.Promise = global.Promise;
 var mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL
 
 if (mongoURL == null && process.env.MONGODB_DATABASE) {
+    var mongoURLLabel
     mongoURL = "mongodb://"
         mongoHost = process.env.DATABASE_SERVICE_NAME ? process.env.DATABASE_SERVICE_NAME  : '127.0.0.1:27017',
         mongoDatabase = process.env.MONGODB_DATABASE
@@ -22,23 +23,22 @@ if (mongoURL == null && process.env.MONGODB_DATABASE) {
     mongoUser = process.env.MONGODB_USER;
 
     if (process.env.MONGO_PORT) {
-            console.log("hot diggity! Got mongo port " + process.env.MONGO_PORT)
             mongoHost = mongoHost + ":" + process.env.MONGO_PORT
         }
 
     if (mongoHost && mongoDatabase) {
-        //mongoURLLabel = mongoURL = 'mongodb://';
+        mongoURLLabel =  mongoURL + 'xxx:xxx@' + mongoHost + '/' + mongoDatabase;;
+
         if (mongoUser && mongoPassword) {
             mongoURL += mongoUser + ':' + mongoPassword + '@';
         }
-        // Provide UI label that excludes user id and pw
-        //mongoURLLabel += mongoHost + ':' + mongoPort + '/' + mongoDatabase;
+
         mongoURL += mongoHost + '/' + mongoDatabase;
 
     }
 }
 
-console.log("mongoURL = " + mongoURL)
+console.log("mongoURLLabel = " + mongoURLLabel)
 
 // Connecting to the database
 mongoose.connect(mongoURL)
