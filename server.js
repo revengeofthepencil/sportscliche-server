@@ -15,6 +15,7 @@ mongoose.Promise = global.Promise;
 var mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL
 
 if (mongoURL == null && process.env.MONGODB_DATABASE) {
+    mongoURL = "mongodb://"
         mongoHost = process.env.DATABASE_SERVICE_NAME ? process.env.DATABASE_SERVICE_NAME  : '127.0.0.1:27017',
         mongoDatabase = process.env.MONGODB_DATABASE
         mongoPassword = process.env.MONGODB_PASSWORD,
