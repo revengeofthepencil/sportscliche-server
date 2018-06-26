@@ -54,12 +54,16 @@ app.use(bodyParser.json())
 
 // define a simple route
 app.get('/', (req, res) => {
-    res.json({"message": "Welcome to EasyNotes application. Take notes quickly. Organize and keep track of all your notes."});
+    res.json({"message": "Yep, the app is running."});
 });
 
 require('./app/routes/cliche.routes.js')(app);
 
-// listen for requests
-app.listen(3000, () => {
-    console.log("Server is listening on port 3000");
-});
+var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000;
+var ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+
+if (ip) {
+    app.listen(port, ip);
+    console.log('Server running on http://%s:%s', ip, port);
+}
+
