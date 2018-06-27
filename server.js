@@ -65,5 +65,7 @@ var ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 if (ip) {
     app.listen(port, ip);
     console.log('Server running on http://%s:%s', ip, port);
+} else {
+    console.log("Uh oh. No ip / port config")
 }
 
