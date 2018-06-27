@@ -13,7 +13,6 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 var mongoURL = process.env.MONGO_URL || process.env.MONGODB_URI
-console.log("mongoURLHeroku = " + mongoURL)
 
 if (mongoURL == null && process.env.MONGODB_DATABASE) {
     var mongoURLLabel
