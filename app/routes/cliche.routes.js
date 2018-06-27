@@ -17,4 +17,5 @@ module.exports = (app) => {
     // Retrieve a random set of cliches
     app.get('/cliches/random/:clicheCount', cliches.findRandom);
 
+    console.log('exporting routes');
 }
