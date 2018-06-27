@@ -61,10 +61,14 @@ app.get('/', (req, res) => {
 require('./app/routes/cliche.routes.js')(app);
 
 var port = process.env.PORT || 3000;
-var ip   = process.env.IP   || '127.0.0.1';
+var ip   = process.env.IP
+console.log("port = " + port);
 
 if (ip) {
     app.listen(port, ip);
+    console.log('Server running on http://%s:%s', ip, port);
+} else if (port) {
+    app.listen(port);
     console.log('Server running on http://%s:%s', ip, port);
 } else {
     console.log("Uh oh. No ip / port config")
