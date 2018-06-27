@@ -12,7 +12,10 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-var mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL
+var mongoURL = process.env.MONGO_URL || ""
+
+var mongoURLHeroku = process.env.MONGODB_URI
+console.log("mongoURLHeroku = " + mongoURLHeroku)
 
 if (mongoURL == null && process.env.MONGODB_DATABASE) {
     var mongoURLLabel
@@ -59,8 +62,8 @@ app.get('/', (req, res) => {
 
 require('./app/routes/cliche.routes.js')(app);
 
-var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000;
-var ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+var port = process.env.PORT || 3000;
+var ip   = process.env.IP   || '127.0.0.1';
 
 if (ip) {
     app.listen(port, ip);
