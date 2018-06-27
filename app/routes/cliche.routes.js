@@ -4,6 +4,8 @@ module.exports = (app) => {
     // Create a new cliche
     app.post('/cliches', cliches.create);
 
+    // Retrieve all cliches
+    app.get('/', cliches.findAll);
 
     // Retrieve all cliches
     app.get('/cliches', cliches.findAll);
