@@ -69,3 +69,5 @@ if (ip) {
     console.log("Uh oh. No ip / port config")
 }
 
+// do we actually need this?
+module.exports = app ;
