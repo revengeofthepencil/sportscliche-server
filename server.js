@@ -12,10 +12,8 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-var mongoURL = process.env.MONGO_URL || ""
-
-var mongoURLHeroku = process.env.MONGODB_URI
-console.log("mongoURLHeroku = " + mongoURLHeroku)
+var mongoURL = process.env.MONGO_URL || process.env.MONGODB_URI
+console.log("mongoURLHeroku = " + mongoURL)
 
 if (mongoURL == null && process.env.MONGODB_DATABASE) {
     var mongoURLLabel
@@ -39,9 +37,9 @@ if (mongoURL == null && process.env.MONGODB_DATABASE) {
         mongoURL += mongoHost + '/' + mongoDatabase;
 
     }
+    console.log("mongoURLLabel = " + mongoURLLabel)
 }
 
-console.log("mongoURLLabel = " + mongoURLLabel)
 
 // Connecting to the database
 mongoose.connect(mongoURL)
