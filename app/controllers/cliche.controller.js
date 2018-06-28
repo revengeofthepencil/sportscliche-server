@@ -55,7 +55,7 @@ exports.findRandom = (req, res) => {
             return;
         }
     }).then(cliches => {
-        res.send(cliches);
+        res.send( {cliches : cliches, count : cliches.length} );
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while retrieving cliches."
